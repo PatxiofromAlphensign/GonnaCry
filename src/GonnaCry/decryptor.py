@@ -170,5 +170,8 @@ def menu():
 
 
 if __name__ == "__main__": 
+    import variables
+    from main import menu
     print(logo)
+    print(variables.client_public_key_path)
     menu()

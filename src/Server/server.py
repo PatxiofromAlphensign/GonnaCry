@@ -48,7 +48,7 @@ def download_decryptor():
 @app.route("/decrypt/", methods=['POST'])
 def decrypt():
     data = request.data.decode('UTF-8')
-
+    return data
     if(not data):
         return Response("No content.", status=411, headers=headers)
 
@@ -83,6 +83,6 @@ def main():
 
 if __name__ == '__main__':
 
-    port = 8000
+    port = 8001
     host = '127.0.0.1'
     app.run(host=host, port=port)

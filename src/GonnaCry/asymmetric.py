@@ -16,14 +16,15 @@ class assymetric():
         self.private_key_PEM = None
         self.public_key_PEM = None
         self.key = None
-
+        self.size = self.get_size(2)
 
     def generate_keys(self):
         self.key = RSA.generate(self.bit_len)
         self.private_key_PEM = self.key.exportKey('OpenSSH')
+
         self.public_key_PEM = self.key.publickey().exportKey('OpenSSH')
         
-    
+        return self.key 
     def encrypt(self, data):
         cipher = PKCS1_OAEP.new(self.key)
         return cipher.encrypt(data)
@@ -45,9 +46,13 @@ class assymetric():
         with open(self.public_key_path, 'w') as content_file:
             content_file.write(self.public_key_PEM)
 
-
+    def get_size(self,x ):
+        k = self.generate_keys()
+        return k.key.size() 
+   
 if __name__ == "__main__":
     cipher = assymetric()
-    cipher.generate_keys()
-    print(cipher.private_key_PEM)
-    print(cipher.public_key_PEM)
+    print(cipher.size)
+
+   # print(cipher.private_key_PEM)
+   # print(cipher.public_key_PEM)
